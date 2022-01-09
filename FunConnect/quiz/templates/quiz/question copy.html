@@ -1,0 +1,72 @@
+{% extends 'quiz/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FunConnect</title>
+
+ 
+
+    </head>
+  
+     
+
+<body>
+    {% block body %}
+    <br>
+    <br>
+    
+        
+    <div class="container">
+        <div class="">
+            <h3>{{ marks.game_id.game_name }}</h3>
+            {% for question in question_id %}
+            <form method="POST" action="{% url 'question' marks_id.game_id.id %}">
+                {% csrf_token %}
+            <br>
+                <h3>{{ question.question }}</h3> 
+                <input type="radio" name="options" value="1"/>&nbsp;{{ question.option1 }} <br>
+                <input type="radio" name="options" value="2" />&nbsp;{{ question.option2 }} <br>
+                <input type="radio" name="options" value="3" />&nbsp;{{ question.option3 }} <br>
+                <input type="radio" name="options" value="4" />&nbsp;{{ question.option4 }} <br>
+                <div>
+                    <input type="hidden" name="answer" value= {{ question.answer }}>
+                    <input type="hidden" name="game_id" value= {{ marks_id.game_id.id }}>
+                    <input type="hidden" name="user_id" value= {{ marks_id.user_id.id }}>
+
+                    {% if question_id.has_next %}
+                        <input type="hidden" name="nextpage" value= {{  question_id.next_page_number }}>
+                    {% else %}
+                        <input type="hidden" name="nextpage" value=None >
+                    {%endif %}
+                </div>  
+                <br>            
+                    <input type="submit" value="submit" class="btn btn-success"> 
+                <br>
+            </form> 
+            {% endfor %}
+                <div>
+               
+                    <br>
+            {% if question_id.has_previous %}
+                <a href="?page=1" class="btn btn-success">First</a>
+                <a href="?page={{ question_id.previous_page_number }}" class="btn btn-success">Previous</a>
+            {% endif %}
+            {% if question_id.has_next %}
+                <a href="?page={{ question_id.next_page_number }}" class="btn btn-success">Next</a>
+                <a href="?page={{ question_id.paginator.num_pages }}" class="btn btn-success">Last</a>
+            {% endif %}
+            <br>
+            Page : {{ question_id.number }} of {{ question_id.paginator.num_pages }}
+        </div>
+        </div>
+    
+    </div>  
+    
+    {% endblock %}
+
+     
+</body>
+</html>

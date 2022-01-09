@@ -1,0 +1,29 @@
+{% extends 'quiz/base.html' %}
+
+
+{% block body %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div class="container" >
+    <div class="text-center ">
+        <div class="card">
+            <h1>Your mark is.....    
+                {% for marks in marks_id %}
+                    {{ marks.mark }}
+                {% endfor %}
+            </h1>
+        </div>
+        <br>
+        <br>
+
+        <a href="{% url 'index' %}" class="btn btn-success">Home</a>
+    </div>  
+    </div> 
+    </div> 
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'quiz/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FunConnect</title>
+    </head>
+<body>
+    {% block body %}
+    <br>
+    <br>
+    <br>
+    <br><br>
+    <br>
+  
+     <div class="container" >
+    <div class="text-center ">
+        <div class="card">
+        <h5> Click here to start the game</h3>
+        <h3>{{ game_id }}</h5>
+        </div>
+        <a href="{% url 'question' game_id.id %}" class="btn btn-success">Play</a>
+    </div>  
+    </div> 
+    </div>   
+    {% endblock %}
+
+     
+</body>
+</html>
